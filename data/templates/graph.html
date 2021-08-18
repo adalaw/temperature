@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h1>graph</h1>
+    <h1>Graph</h1>
     <hr>
 
     <!-- === messages === -->
@@ -14,9 +14,9 @@
         </div>
     {% endif %}
 
-    <!-- === graphs === -->
+    <!-- === graph === -->
 
-    <div id="heatmap" style="width:800px; height: 800px;"></div>
+    <div id="heatmap" style="width:600px; height: 600px;"></div>
     
     <form action="" method="post">
         {% csrf_token %}
@@ -43,12 +43,12 @@
                 maxOpacity: .5,
                 minOpacity: 0,
                 blur: .75,
-                width: 800,
-                height: 800
+                width: 600,
+                height: 600
             })
             heatmap.setData({
                 max: 40,
-                min: 5,
+                min: 10,
                 data: [
                     {% for item in data %}
                         {{item}}
