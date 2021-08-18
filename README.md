@@ -8,6 +8,8 @@ Users can upload and remove their csv files. Data from each file will be display
 
 ## Work Description
 
+I read the instruction first and then make a draft of some pages including what functions.
+
 There was a misunderstanding at the beginning that I thought every data row need to be saved to database for a big scale graph and users will add or remove each data row. That is how the separate add/remove functions came from. But then I think each graph for each file should make more sense that "switching them easily visualise the
 condition of the silos at a glance". So I make changes.
 
