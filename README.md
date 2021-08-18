@@ -4,7 +4,7 @@ Apart from Python3, you need to install all libraries in requirements.txt via "p
 
 ## Technical Description
 
-Users can upload and remove their csv files. Data from each file will be displayed as a heatmap graph -- the hotter temperature, the color becomes more orange/red; the cooler temperature, the color becomes more green/blue. Those data will also save separately for users to manipulate.
+Users can upload and remove their csv files. By clicking on the file's timestamp link, users will go to that file page. Data from each file will be displayed as a heatmap graph -- the hotter temperature, the color becomes more orange/red; the cooler temperature, the color becomes more green/blue. Those data will also save separately for users to manipulate.
 
 ## Work Description
 
