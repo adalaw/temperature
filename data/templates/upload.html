@@ -9,18 +9,20 @@
     <!-- === messages === -->
 
     {% if success_message %}
-    <div class="ui success message">
-        <i class="close icon"></i>
-        <div class="header">{{success_message}}</div>
-    </div>
+        <div class="ui success message">
+            <i class="close icon"></i>
+            <div class="header">{{success_message}}</div>
+        </div>
     {% endif %}
 
     <!-- === add new data === -->
 
     <form action="" method="POST" class="ui form" enctype="multipart/form-data">
         {% csrf_token %}
+
         {{form}}
         <button class="ui positive button mtop" type="submit" style="margin: 20px auto;">Upload</button>
+    
     </form>
     
     <a href="{% url 'home' %}">Back to Home</a>

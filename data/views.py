@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import csv
 
 # import from this project
@@ -7,24 +7,43 @@ from .models import *
 
 def home(request):
     addForm = NewDataForm()
+    removeForm = RemoveDataForm()
+    error_message = None
 
     if request.POST:
 
         # === add new data ===
 
-        form = NewDataForm(request.POST)
-        if form.is_valid:
+        if 'add' in request.POST:
+            form = NewDataForm(request.POST)
+            if form.is_valid:
+                # save data to Tempaerature model
+                form.save()
 
-            # save file to Tempaerature model
-            form.save()
-            form = NewDataForm()
+                return redirect('home')
 
         #  === remove data ===
 
+        if 'remove' in request.POST:
+            form = RemoveDataForm(request.POST)
+            if form.is_valid:
+                # remove data to Tempaerature model
+                x_value = form.cleaned_data["x_value"]
+                y_value = form.cleaned_data["y_value"]
 
+                try:
+                    obj = Temperature.objects.get(x=x_value, y=y_value)
+                    obj.remove()
+                    return redirect('home')
+                
+                except:
+                    error_message = 'No such data...'
+                
 
     return render(request, 'home.html', {
         'addForm': addForm,
+        'removeForm': removeForm,
+        'error_message': error_message,
     })
 
 def upload_file(request):

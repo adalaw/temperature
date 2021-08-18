@@ -2,18 +2,42 @@
 
 {% block body %}
 
-<h1>Home</h1>
-<hr>
+    <h1>Home</h1>
+    <hr>
 
-<a href="{% url 'upload' %}">Upload file</a>
+    <!-- === messages === -->
 
-<!-- === add data === -->
+    {% if error_message %}
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">{{error_message}}</div>
+        </div>
+    {% endif %}
 
+    <!-- === add data === -->
 
-<!-- === remove data === -->
+    <a href="{% url 'upload' %}">Upload file</a>
+    <br><br>
 
+    <form action="" method="POST" class="ui form">
+        {% csrf_token %}
 
-<!-- === 2D graph === -->
+        {{addForm}}
+        <button class="ui positive button mtop" type="submit" style="margin: 20px auto;" name="add">Add</button>
+    
+    </form>
+
+    <!-- === remove data === -->
+
+    <form action="" method="POST" class="ui form">
+        {% csrf_token %}
+        
+        {{removeForm}}
+        <button class="ui negative button mtop" type="submit" style="margin: 20px auto;" name="remove">Remove</button>
+
+    </form>
+    
+    <!-- === 2D graph === -->
 
 
 
