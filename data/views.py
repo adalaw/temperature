@@ -6,6 +6,11 @@ from .forms import *
 from .models import *
 
 def home(request):
+
+    # === graphs ===
+
+    files = Csv.objects.filter(activated=True)
+
     addForm = NewDataForm()
     removeForm = RemoveDataForm()
     error_message = None
@@ -33,7 +38,7 @@ def home(request):
 
                 try:
                     obj = Temperature.objects.get(x=x_value, y=y_value)
-                    obj.remove()
+                    obj.delete()
                     return redirect('home')
                 
                 except:
@@ -41,9 +46,39 @@ def home(request):
                 
 
     return render(request, 'home.html', {
+        'files': files,
         'addForm': addForm,
         'removeForm': removeForm,
         'error_message': error_message,
+    })
+
+def graph(request, id):
+
+    file = Csv.objects.get(id=id)
+
+    output = []
+
+    with open(file.file.path, 'r') as f:
+            reader = csv.reader(f)
+            data = [row for row in reader]
+
+    # set up the graph
+    for i in range(1, len(data)):
+        output.append("{ x: " + str(float(data[i][0])*40) +
+        ", y: " + str(float(data[i][1])*40) + ", value: " +
+        str(data[i][2]) + "},")
+
+    files = Csv.objects.filter(activated=True)
+
+    # remove this file
+    if request.POST:
+        file.delete()
+        return redirect('home')
+
+    return render(request, 'graph.html', {
+        'file': file,
+        'files': files,
+        'data' : output
     })
 
 def upload_file(request):

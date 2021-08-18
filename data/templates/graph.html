@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <h1>graph</h1>
+    <hr>
+
+    <!-- === messages === -->
+
+    {% if error_message %}
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">{{error_message}}</div>
+        </div>
+    {% endif %}
+
+    <!-- === graphs === -->
+
+    <div id="heatmap" style="width:800px; height: 800px;"></div>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <button class="ui negative button mtop" type="submit" style="margin: 20px auto;">Remove this file</button>
+    </form>
+
+    {% for file in files %}
+        <a href="{% url 'graph' file.id %}">{{file.timestamp}}</a>
+        <br>
+    {% endfor %}
+
+    <!-- === add data === -->
+
+    <a href="{% url 'upload' %}">Upload file</a>
+    <br><br>
+
+    <!-- === script === -->
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (e)=>{
+            var heatmap = h337.create({
+                container: document.querySelector('#heatmap'),
+                radius: 20,
+                maxOpacity: .5,
+                minOpacity: 0,
+                blur: .75,
+                width: 800,
+                height: 800
+            })
+            heatmap.setData({
+                max: 40,
+                min: 5,
+                data: [
+                    {% for item in data %}
+                        {{item}}
+                    {% endfor %}
+                ]
+            });
+        }) 
+    </script>
+
+{% endblock %}
