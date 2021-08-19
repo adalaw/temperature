@@ -14,7 +14,7 @@ Users can upload and remove their csv files. By clicking on the file's timestamp
 
 I read the instruction first and then make a draft of some pages including what functions.
 
-There was a misunderstanding at the beginning that I thought every data row need to be saved to database for a big scale graph and users will add or remove each data row. That is how the separate add/remove functions came from. But then I think each graph for each file should make more sense that "switching them easily visualise the
+There was a misunderstanding at the beginning that I thought every data row need to be saved to database for a big scale graph and users will add or remove each data row. But then I think each graph for each file should make more sense that "switching them easily visualise the
 condition of the silos at a glance". So I make changes.
 
 In the process, I was not sure which graph should be displayed. Then I do some research and I found a heatmap library which I believe it is suitable for displaying temperature so I learnt and use it.
