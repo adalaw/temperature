@@ -98,6 +98,8 @@ def upload_file(request):
             # save data to Temperature model
             
             obj = Csv.objects.get(activated=False)
+
+            '''MISUNDERSTANDING
             with open(obj.file.path, 'r') as f:
                 reader = csv.reader(f)
                 for row in reader:
@@ -109,7 +111,8 @@ def upload_file(request):
                             y = float(row[1]),
                             temperature = float(row[2])
                         )
-
+            '''
+            
             obj.activated = True
             obj.save()
             success_message = 'Uploaded successfully.'
