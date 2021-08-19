@@ -5,43 +5,11 @@
     <h1>Home</h1>
     <hr>
 
-    <!-- === messages === -->
-
-    {% if error_message %}
-        <div class="ui negative message">
-            <i class="close icon"></i>
-            <div class="header">{{error_message}}</div>
-        </div>
-    {% endif %}
-
     <!-- === graphs === -->
     
     {% for file in files %}
         <a href="{% url 'graph' file.id %}">{{file.timestamp}}</a>
         <br>
     {% endfor %}
-
-    <!-- === add data === -->
-
-    <a href="{% url 'upload' %}">Upload file</a>
-    <br><br>
-
-    <form action="" method="POST" class="ui form">
-        {% csrf_token %}
-
-        {{addForm}}
-        <button class="ui positive button mtop" type="submit" style="margin: 20px auto;" name="add">Add</button>
-    
-    </form>
-
-    <!-- === remove data === -->
-
-    <form action="" method="POST" class="ui form">
-        {% csrf_token %}
-        
-        {{removeForm}}
-        <button class="ui negative button mtop" type="submit" style="margin: 20px auto;" name="remove">Remove</button>
-
-    </form>
 
 {% endblock %}

@@ -12,6 +12,7 @@ class Temperature(models.Model):
     x = models.CharField(max_length=200)
     y = models.CharField(max_length=200)
     temperature = models.CharField(max_length=200)
+    csv = models.ForeignKey(Csv, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.x} - {self.y} - {self.temperature}"

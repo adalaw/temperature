@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 import csv
 
 # import from this project
@@ -11,6 +12,7 @@ def home(request):
 
     files = Csv.objects.filter(activated=True)
 
+    ''' MISUNDERSTANDING
     addForm = NewDataForm()
     removeForm = RemoveDataForm()
     error_message = None
@@ -21,7 +23,7 @@ def home(request):
 
         if 'add' in request.POST:
             form = NewDataForm(request.POST)
-            if form.is_valid:
+            if form.is_valid():
                 # save data to Tempaerature model
                 form.save()
 
@@ -31,7 +33,7 @@ def home(request):
 
         if 'remove' in request.POST:
             form = RemoveDataForm(request.POST)
-            if form.is_valid:
+            if form.is_valid():
                 # remove data to Tempaerature model
                 x_value = form.cleaned_data["x_value"]
                 y_value = form.cleaned_data["y_value"]
@@ -43,13 +45,13 @@ def home(request):
                 
                 except:
                     error_message = 'No such data...'
-                
+        '''      
 
     return render(request, 'home.html', {
         'files': files,
-        'addForm': addForm,
-        'removeForm': removeForm,
-        'error_message': error_message,
+        # 'addForm': addForm,
+        # 'removeForm': removeForm,
+        # 'error_message': error_message,
     })
 
 def graph(request, id):
@@ -69,8 +71,7 @@ def graph(request, id):
         str(data[i][2]) + "},")
 
     files = Csv.objects.filter(activated=True)
-
-    # remove this file
+    
     if request.POST:
         file.delete()
         return redirect('home')
@@ -78,7 +79,7 @@ def graph(request, id):
     return render(request, 'graph.html', {
         'file': file,
         'files': files,
-        'data' : output
+        'data' : output,
     })
 
 def upload_file(request):
@@ -87,7 +88,7 @@ def upload_file(request):
 
     if request.POST:
         form = CsvForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
 
             # save file to Csv model
 

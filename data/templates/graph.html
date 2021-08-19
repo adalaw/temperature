@@ -5,15 +5,6 @@
     <h1>Graph</h1>
     <hr>
 
-    <!-- === messages === -->
-
-    {% if error_message %}
-        <div class="ui negative message">
-            <i class="close icon"></i>
-            <div class="header">{{error_message}}</div>
-        </div>
-    {% endif %}
-
     <!-- === graph === -->
 
     <div id="heatmap" style="width:600px; height: 600px;"></div>
@@ -28,12 +19,14 @@
         <br>
     {% endfor %}
 
-    <!-- === add data === -->
-
-    <a href="{% url 'upload' %}">Upload file</a>
+    
     <br><br>
 
-    <!-- === script === -->
+    
+    <a href="{% url 'home' %}">Back to Home</a>
+
+
+    <!-- === custom JS === -->
     
     <script>
         document.addEventListener('DOMContentLoaded', (e)=>{
